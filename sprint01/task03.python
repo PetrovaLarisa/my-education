@@ -1,0 +1,20 @@
+#Given a string, check if its characters can be rearranged to form a palindrome. Where a palindrome is a string that reads the same left-to-right and right-to-left.
+
+#Example
+
+#"trueistrue" -> false;
+#"abcab" -> true because "abcba" is a palindrome
+
+def isPalindrome(str):
+    dict={}
+    s = set(str)
+    for ch in s:
+        dict[ch]  = str.count(ch)
+    q_odd_k = 0
+    for k in dict.keys():
+        if dict[k]%2 == 1:
+             q_odd_k += 1
+    if q_odd_k == 1 or q_odd_k == 0:
+        return True
+    else:
+        return False
