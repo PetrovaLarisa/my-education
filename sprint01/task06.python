@@ -1,0 +1,17 @@
+#Write a program that given an array of integers determines if it is sorted in "ascending" order, "descending" order or "not sorted" at all.
+def order(a):
+    cur = a[0]
+    flag_asc = True
+    flag_desc = True
+    for i in range(1, len(a)):
+        if a[i] < cur:
+            flag_asc = False
+        elif a[i] > cur:
+           flag_desc = False
+        cur = a[i]
+    if flag_asc == True:
+        return "ascending"
+    elif flag_desc == True:
+        return "descending"
+    else:
+        return "unsorted"
