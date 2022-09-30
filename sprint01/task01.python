@@ -1,2 +1,30 @@
-//codewars
-//Python code 
+#For the given integer n, consider an increasing sequence consisting of all positive integers that are either powers of n, or sums of distinct powers of n.
+
+#Your task is to find the kth (1-based) number in this sequence.
+
+#Example
+
+#For n = 3 and k = 4, the output should be
+#kthTerm(n, k) = 9.
+def kthTerm(n, k):
+     cur =0
+     l = []
+     i = 0
+     p = 0
+     while True:
+         i += 1
+         if  i in [2**j for j in range(10)]:
+             l.append(n ** p)
+             cur = n**p
+             p+=1
+         else:
+             q = i-2
+             for v in range(q):
+                 l.append(cur + l[v])
+                 if v+1<q:
+                     i+=1
+       
+         if i>=k:
+            break
+     return l[k-1]
+
