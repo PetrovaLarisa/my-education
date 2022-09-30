@@ -1,0 +1,35 @@
+#Convert a certain expression like 2+3 to expression in a postfix notation.
+
+#The given expression can have one of the following tokens:
+
+#a number;
+#a parenthesis;
+#arithmetic operator:
+#subtraction (-);
+#addition (+);
+#multiplication (*);
+#devision (/);
+#modulo operation (%).
+def toPostFixExpression(e):
+    priority = {'+':1, '-':1, '*':2, '/':2, '%':2}
+    rez = []
+    op = []
+    for el in e:
+        if el.isdigit():
+            rez.append(el)
+        elif el == '(':
+            op.append('(')
+        elif el in {"+", "-", "*", "/", "%"}:
+            while op and op[-1]!='(' and priority[el]<=priority[op[-1]]:
+                rez.append(op.pop())
+            op.append(el)
+        elif el == ")":
+            for el_op in op[::-1]:
+                if el_op != "(":
+                    rez.append(el_op)
+                    op.pop()
+                else:
+                    op.pop()
+    while op:
+        rez.append(op.pop())
+    return rez
