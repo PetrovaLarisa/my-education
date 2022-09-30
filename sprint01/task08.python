@@ -1,0 +1,18 @@
+#'s3ooOOooDy' has exams. He wants to study hard this time. He has an array of studying hours per day for the previous exams.
+#He wants to know the length of the maximum non-decreasing contiguous subarray of the studying days, to study as much before his current exams.
+def studying_hours(a):
+    arr_max = []
+    max_length = 1
+    cur = a[0]
+    for i in range(1, len(a)):
+        if  a[i] >= cur:
+            max_length += 1
+            cur = a[i]
+        else:
+            arr_max.append(max_length)
+            max_length = 1
+            cur = a[i]
+    else:
+        arr_max.append(max_length)
+    return max(arr_max)
+    
