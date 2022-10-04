@@ -1,0 +1,11 @@
+#As input data, you have a list of strings.
+
+#Write a method double_string() for counting the number of strings from the list, represented in the form of the concatenation of two strings from this arguments  list
+def double_string(data):
+    counter = 0
+    k = 0
+    for el in data:
+        if len(el)%2 == 0:
+             if el[:len(el)//2] in data:
+                 counter += 1
+    return counter
