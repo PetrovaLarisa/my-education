@@ -1,0 +1,31 @@
+#Create function create_account(user_name: string, password: string, secret_words: list). This function should return inner function check.
+
+#The function check compares the values of its arguments with password and secret_words: the password must match completely, secret_words may be misspelled (just one element).
+
+#Password should contain at least 6 symbols including one uppercase letter, one lowercase letter,  special character and one number.
+
+#Otherwise function create_account raises ValueError. 
+import re
+def create_account(user_name, password, secret_words):
+    p = (len(password)>=6, re.search(r'[a-z]+', password), \
+        re.search(r'[A-Z]+', password), re.search(r'\d+', password), re.search(r'[`!@#$%^&*()_+=]', password))
+    if not all(p):
+        raise ValueError
+    def check(pass_check, secret_words_check):
+        count = 0
+        if password == pass_check:
+            if len(secret_words) == len(secret_words_check):
+                for word in secret_words:
+                    if word not in secret_words_check:
+                        count  += 1
+                    else:
+                        secret_words_check.remove(word)
+                if count <=1:
+                    return True
+                else:
+                    return False
+            else:
+                return False
+        else:
+            return False
+    return check
