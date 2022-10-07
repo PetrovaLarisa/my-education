@@ -1,0 +1,3 @@
+#Create function create with one string argument. This function should return anonymous function that checks if the argument of function is equals to the argument of outer function. 
+def create(name_outer):
+     return lambda name_inner: True if name_inner == name_outer else False
