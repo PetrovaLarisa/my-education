@@ -1,0 +1,31 @@
+#Create decorator logger. The decorator should print to the console information about function's name and all its arguments separated with ',' for the function decorated with logger.
+
+#Create function concat with any numbers of any arguments which concatenates arguments and apply logger decorator for this function. 
+def logger(func):
+    def inner(*a, **b):
+        e = ""
+        for i in a:
+            e += f', {i}'
+        for j in b:
+            e += f", {b[j]}"
+        res = func(*a, **b)
+        print(f"Executing of function {func.__name__} with arguments {e[2:]}...")
+        return res
+    return inner
+    
+@logger    
+def concat(*a, **b):
+    q = ''
+    for r in a:
+        q += str(r)
+    for w in b:
+        q += str(b[w])
+    return q
+ 
+@logger
+def sum(a,b):
+    return a+b
+    
+@logger
+def print_arg(arg):
+    print(arg)
