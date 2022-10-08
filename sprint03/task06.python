@@ -1,0 +1,17 @@
+#Generator function randomWord has as an argument list of words. It should return any random word from this list. 
+#Each time words are different until the end of the list is reached. Then words are taken from the initial list again.
+
+import random, copy
+def randomWord(l):
+    l_cur = copy.deepcopy(l)
+
+    while True:
+        if len(l_cur) == 0:
+            yield None
+        elif len(l_cur) == 1:
+            yield l_cur[0]
+            l_cur = copy.deepcopy(l)
+        else:
+            w = random.choice(l_cur)
+            l_cur.remove(w)
+            yield w
