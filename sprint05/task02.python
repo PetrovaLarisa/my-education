@@ -1,0 +1,31 @@
+#Write  the function day_of_week(day) whose input parameter is a number or string representation of number.
+#The function returns the corresponding day of the week if the input parameter is in the range of 1 to 7
+
+import re
+class CustomError(Exception):
+    def __init__(self, data):
+        self.data = data
+def day_of_week(day):
+    try:
+        if re.match(r'[-+]?\d$',str(day)):
+            day = int(day)
+            if day == 1:
+                return "Monday"
+            elif day == 2:
+                return "Tuesday"
+            elif day == 3:
+                return "Wednesday"
+            elif day == 4:
+                return "Thursdsay"
+            elif day == 5:
+                return "Friday"
+            elif day == 6:
+                return "Saturday"
+            elif day == 7:
+                return "Sunday"
+            elif day < 1 or day >7:
+                raise CustomError("There is no such day of the week! Please try again.")
+        else:
+            raise CustomError("You did not enter a number! Please try again.")
+    except CustomError as e:
+        return e.data
