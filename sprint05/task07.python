@@ -1,0 +1,25 @@
+#Write  the function solve_quadric_equation(a, b, c) the three input parameters of which are numbers. The function should return 
+#the solution of quadratic equation ax2+bx+c=0, where coefficients a, b, c are input parameters of  the function solve_quadric_equation:
+
+ #in case of correct data the function should displayed the corresponding message – "The solution are x1=… and x2=…"
+
+#in the case of division by zero the function should displayed the corresponding message – "Zero Division Error" 
+
+#in the case of incorrect data the function should displayed the message – "Could not convert string to float"
+import cmath
+class MyError(Exception):
+    def __init__(self, data):
+        self.data = data
+def solve_quadric_equation(a, b, c):
+    try:
+        if a == 0:
+            return "Zero Division Error"
+        elif str(a).isalpha() or str(b).isalpha() or str(b).isalpha():
+            raise MyError("Could not convert string to float")
+        else:
+            d = b**2-4*a*c
+            x1 = (-b-d**0.5)/2/a
+            x2 = (-b+d**0.5)/2/a
+            return(f"The solution are x1={complex(x1.real, x1.imag)} and x2={complex(x2.real,x2.imag)}")
+    except MyError as e:
+        return e.data
