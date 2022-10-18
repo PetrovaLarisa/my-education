@@ -1,0 +1,28 @@
+#Create function find(file, key)
+#This function parses json-file and returns all unique values of the key.
+import json
+def get_all(myjson, key, out):
+    if type(myjson) is dict:
+         for jsonkey in myjson:
+             if jsonkey == key:
+                 if type(myjson[jsonkey]) is list:
+                     for i in myjson[jsonkey]:
+                         if i not in out:
+                             out.append(i)
+                 else:
+                     if myjson[jsonkey] not in out:
+                         out.append(myjson[jsonkey])
+             elif type(myjson[jsonkey]) in (list, dict):
+                 get_all(myjson[jsonkey], key, out)
+             elif jsonkey == key and myjson[jsonkey] not in out:
+                out.append(myjson[jsonkey])
+    elif type(myjson) is list:
+         for item in myjson:
+             get_all(item, key, out)
+    return out
+
+def find(file, key):
+    with open(file) as read_file:
+        data = json.load(read_file)
+    out = []
+    return get_all(data, key, out)
