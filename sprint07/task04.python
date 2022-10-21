@@ -1,0 +1,23 @@
+#Imagine we have a washing machine which can wash the clothes,
+#rinse the clothes and spin the clothes but all the tasks separately. We need a system that can automate the whole task without the disturbance or interference of us. 
+
+class WashingMachine:
+    def __init__(self):
+        self.startWashing()
+        
+    def startWashing(self):
+        Washing.washing(self)
+        Rinsing.rinsing(self)
+        Spining.spining(self)
+
+class Washing():
+     def washing(self):
+         print("Washing...")
+
+class Rinsing():
+    def rinsing(self):
+        print("Rinsing...")
+
+class Spining():
+    def spining(self):
+        print("Spinning...")
