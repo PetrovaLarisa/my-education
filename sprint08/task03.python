@@ -1,0 +1,50 @@
+#Write the function quadratic_equation with arguments a, b ,c that solution to quadratic equation without a complex solution.
+
+#Write unit tests for this function with QuadraticEquationTest class
+
+#Minimum 3 tests: discriminant < 0, discriminant > 0, discriminant = 0
+import unittest
+class CustomError(Exception):
+    def __init__(self, data):
+        self.data = data
+
+def quadratic_equation(a, b, c):
+    try:
+        if a==0:
+           raise ValueError("error")
+        d =  b ** 2 - 4 * a * c
+        if d < 0:
+            raise CustomError("The equation doesn't have real roots")
+        elif d == 0:
+            x = -b / 2 / a
+            return x
+        else:
+            x1 = (-b + d ** 0.5) / 2 / a
+            x2 = (-b - d ** 0.5) / 2 / a
+            return x1, x2
+    except ZeroDivisionError:
+        print("A is null")
+    except CustomError:
+        return None
+
+
+class QuadraticEquationTest(unittest.TestCase):
+    def test_diskr_less_zero(self):
+        expected = None
+        actual = quadratic_equation(1, 2, 3)
+        self.assertEqual(actual, expected)
+
+    def test_diskr_great_zero(self):
+        expected = (2.5, -1.5)
+        actual = quadratic_equation(4, -4, -15)
+        self.assertEqual(actual, expected)
+
+    def test_d_e_z(self):
+        expected = 4.0
+        actual = quadratic_equation(1, -8, 16)
+        self.assertEqual(actual, expected)
+        
+    def test_a_zero(self):
+        self.assertRaises(ValueError, quadratic_equation, 0, 2, 3)
+
+
