@@ -1,0 +1,42 @@
+#Create function file_parser. If function is called with 2 arguments it must count the number of occurrences string in a file, in case of 3 arguments it must replace string in a file to new string
+
+#first argument - path to file
+
+#second argument - find string
+
+#third argument - replace string
+
+#Function must returned string with count of occurrences or count of replaced strings
+
+#Example:
+
+#file_parser("file.txt", 'x', 'o')-> Replaced 8 strings
+#file_parser("file.txt", 'o') -> Found 8 strings
+#Please, create class ParsesTest and write unittest for file_parser function uses mock object
+#from unittest.mock import patch, mock_open
+
+def file_parser(*args):
+    with open(args[0], 'r') as file:
+        if len(args) == 2:
+            data = file.read()
+            return f'Found {data.count(args[1])} strings'
+        elif len(args) == 3:
+            data = file.read()
+            data_edit =  data.replace(args[1], args[2])
+    with open(args[0], 'w') as file:
+        file.write(data_edit)
+
+
+class ParserTest(unittest.TestCase):
+    def test_num_one(self):
+        self.data = ('file.txt', "p", "h")
+        with patch('builtins.open', new = mock_open(read_data=self.data[0])) as file_mock:
+            file_parser(file_mock, self.data[1], self.data[2])
+            file_mock.assert_called()
+            
+    def test_num_two(self):
+        self.data = ('file.txt', "p", "h")
+        with patch('builtins.open', new = mock_open(read_data=self.data[0])) as file_mock:
+            file_parser(file_mock, self.data[1], self.data[2])
+            handle = file_mock()
+            handle.write.assert_called_with(self.data[0].replace(self.data[1], self.data[2]))
