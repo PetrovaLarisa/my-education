@@ -1,0 +1,8 @@
+Given a database with (at least) two tables: customers and orders as shown below, write an SQL query that returns the customer name,
+city and amount for all orders between $100 and $3500 inclusive, grouped by name and ordered by city.
+SELECT name, city, SUM(amount) as totalSum
+FROM  customers  INNER JOIN orders
+ON customers.id = orders.customer_id
+WHERE amount BETWEEN 100 AND 3500
+GROUP BY name
+ORDER BY city
