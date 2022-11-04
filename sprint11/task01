@@ -1,0 +1,32 @@
+Create a Python program to use the sqlite database named "q1.db". The query to the database should display information, as shown in the example below, 
+including phrases: about the successful connection, the total number of records, the actual records, the record of closing the database. 
+From the table of "customers" to deduce all records for which in a "grade" field of value more than 200 with sort ordering on id
+
+from sqlalchemy import create_engine, Table, Column, Integer, String, MetaData, ForeignKey, text
+engine = create_engine("sqlite:///q1.db")
+metadata = MetaData()
+customers_table = Table("customers",
+                        metadata,
+                        Column('id', Integer, primary_key = True),
+                        Column('name', String),
+                        Column('city', String),
+                        Column('grade', Integer),
+                        Column('salesperson_id', Integer))
+metadata.create_all(engine)
+
+print(f'Connected to SQLite')
+select_total_rows =customers_table.select(customers_table.c.grade>200)
+r = engine.execute(select_total_rows)
+print(f'Total rows are:  ', len(r.all()))
+l = engine.execute(select_total_rows)
+print(f'Printing each row')
+for i in l.all():
+    print(f'Id:  {i[0]}')
+    print(f'Name:  {i[1]}')
+    print(f'City:  {i[2]}')
+    print((f'Grade:  {i[3]}'))
+    print(f'Seller:  {i[4]}')
+    print()
+    print()
+
+print(f'The SQLite connection is closed')
